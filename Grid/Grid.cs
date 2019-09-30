@@ -1,7 +1,5 @@
 using System;
 using pixelSpace;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
 
 namespace gridSpace
 {
@@ -39,50 +37,6 @@ namespace gridSpace
             int xPos = Math.Abs((x + maxRows) % maxRows); // e.g. (-1+200) % 200 = 199  (20+200)%200 = 20
             int yPos = Math.Abs((y + maxColumns) % maxColumns);
             return Pixels[xPos, yPos];
-        }
-
-        public void drawPixels() // could bring this into updateGrid method
-        {
-            pixel pixelToDraw;
-            for (int row = 0; row < maxRows; row++)
-            {
-                for (int column = 0; column < maxColumns; column++)
-                {
-                    pixelToDraw = getPixel(row, column);
-                    Console.BackgroundColor = pixelToDraw.isAlive() ? ConsoleColor.White : ConsoleColor.Black;
-
-                    Console.Write(" ");
-                    Console.ResetColor();
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine();
-        }
-
-        public Image CreateNewBitmapImage()
-        {
-            var image = new Image<Rgba32>(maxRows, maxColumns);
-
-            pixel pixelToDraw;
-
-            for (int row = 0; row < maxRows; row++)
-            {
-                for (int column = 0; column < maxColumns; column++)
-                {
-                    pixelToDraw = getPixel(row, column);
-                    if (pixelToDraw.isAlive())
-                    {
-                        image[row, column] = Rgba32.White;
-                    }
-                    else
-                    {
-                        image[row, column] = Rgba32.Black;
-                    }
-                }
-            }
-
-            return image;
-
         }
 
         public void UpdateGrid()
@@ -156,7 +110,6 @@ namespace gridSpace
             }
             else
             {
-                // Console.WriteLine(numNeighbours);
                 switch (numNeighbours)
                 {
                     case (3):
@@ -168,15 +121,6 @@ namespace gridSpace
             }
         }
 
-        public void testSetup()
-        {
-            int[,] coordArray = new int[,] { { 10, 10 }, { 11, 10 }, { 11, 12 }, { 13, 11 }, { 14, 10 }, { 15, 10 }, { 16, 10 } };
-            for (int i = 0; i < coordArray.Length / 2; i++)
-            {
-                getPixel(coordArray[i, 0], coordArray[i, 1]).SetStatus(true);
-            }
-
-        }
 
     }
 

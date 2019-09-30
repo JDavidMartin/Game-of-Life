@@ -1,11 +1,8 @@
 ﻿using System;
 using gridSpace;
-using System.Threading;
-using System.IO;
-using System.Text;
+using DrawingSpace;
 
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
 
 namespace GameOfLife
 {
@@ -13,13 +10,11 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            Console.ResetColor();
-            Console.BackgroundColor = ConsoleColor.Black;
-
             grid MyGrid = new grid(100, 100);
             MyGrid.initiateGrid();
 
-            var gif = MyGrid.CreateNewBitmapImage();
+            DrawingClass drawing= new DrawingClass();
+            Image gif = drawing.DrawGrid(MyGrid);
 
             int iteration = 0;
             while (iteration < 1000)
@@ -28,7 +23,7 @@ namespace GameOfLife
                 iteration++;
                 Console.WriteLine(iteration);
 
-                Image newImage = MyGrid.CreateNewBitmapImage();
+                Image newImage = drawing.DrawGrid(MyGrid);
                 gif.Frames.InsertFrame(iteration, newImage.Frames.RootFrame);
             }
             gif.Save("result.gif");
