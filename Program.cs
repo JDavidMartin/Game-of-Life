@@ -10,8 +10,12 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            grid MyGrid = new grid(100, 100);
-            MyGrid.initiateGrid();
+            int x = 100;
+            int y = 100;
+            int percentageLiving = 75;
+
+            grid MyGrid = new grid(x, y);
+            MyGrid.initiateGrid(percentageLiving);
 
             DrawingClass drawing= new DrawingClass();
             Image gif = drawing.DrawGrid(MyGrid);

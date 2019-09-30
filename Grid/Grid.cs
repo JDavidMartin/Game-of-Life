@@ -18,15 +18,14 @@ namespace gridSpace
 
         }
 
-        public void initiateGrid()
+        public void initiateGrid(int percentageLiving)
         {
             Random livingRNG = new Random();
             for (int i = 0; i <= maxRows; i++)
             {
                 for (int j = 0; j <= maxColumns; j++)
                 {
-                    bool livingbool = (livingRNG.Next(0, 11) > 8);
-                    // bool livingbool = false;
+                    bool livingbool = (livingRNG.Next(0, 101) > percentageLiving);
                     Pixels[i, j] = new pixel(i, j, livingbool);
                 }
             }
